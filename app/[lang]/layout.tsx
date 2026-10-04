@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Figtree, Saira_Extra_Condensed } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { getContent } from "@/content";
 import { hasLocale, locales } from "@/lib/i18n";
 import "../globals.css";
@@ -48,7 +49,10 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   if (!hasLocale(lang)) notFound();
   return (
     <html lang={lang} className={`${display.variable} ${body.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
